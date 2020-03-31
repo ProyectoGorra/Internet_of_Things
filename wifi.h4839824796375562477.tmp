@@ -1,0 +1,30 @@
+class WifiClase{
+  const char* ssid = "PagaTuInternet";
+  const char* password = "aguafria";
+
+  public void conectarAWifi{
+    Serial.println();
+  Serial.println();
+  Serial.print("Conectando con ");
+  Serial.println(ssid);
+ 
+  WiFi.begin(ssid, password);
+ 
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("Conectado con WiFi.");
+ 
+  // Inicio del Servidor web.
+  server.begin();
+  Serial.println("Servidor web iniciado.");
+ 
+  // Esta es la IP
+  Serial.print("Esta es la IP para conectar: ");
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+    }
+  };
