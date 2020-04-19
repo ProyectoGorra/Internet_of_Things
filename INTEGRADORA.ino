@@ -3,18 +3,18 @@ AdafruitIO_Feed *counter = io.feed("counter");
 /////////////////////////////////////////
 #define TR1 5 // = pin 1
 #define EC1 4 // =´pin 2
-#define TR2 13 // = pin 7
-#define EC2 15 // = pin 8
+#define buzzer 13 // = pin 7
+#define vibrador 15 // = pin 8
 
 long duration, distance;
-long distancec, distancec2;
+long distancec;
 
 void setup() {
   Serial.begin(9600);
   pinMode(TR1, OUTPUT);
   pinMode(EC1, INPUT);
-  pinMode(TR2, OUTPUT);
-  pinMode(EC2, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(vibrador, OUTPUT);
   pinMode(BUILTIN_LED, OUTPUT);
   //////////////////////// Conecta a la red adafruit
   while(! Serial);
@@ -23,7 +23,7 @@ void setup() {
   io.connect();
   // wait for a connection
   while(io.status() < AIO_CONNECTED) {
-    Serial.print(".");
+    Serial.print(".-");
     delay(500);
   }
 
@@ -33,10 +33,9 @@ void setup() {
 }
 void loop() {
   
-  distancec = distanciarLateral(TR1, EC1);
+  distancec = distanciar(TR1, EC1);
   delay(100);
   Serial.println("/////// 2");
-  distancec2 = distanciarLateral(TR2, EC2);
   //////////////////////////////////////////////////
   io.run();
 
@@ -44,7 +43,6 @@ void loop() {
   Serial.print("sending -> ");
   Serial.println(distancec);
   counter->save(distancec);
-  counter->save(distancec2);
 
   // increment the count by 1
 
@@ -55,7 +53,7 @@ void loop() {
 ////////////////////////////////////////////////
 }
 
-long distanciarLateral(int trigger, int echo)
+long distanciar(int trigger, int echo)
 {
   digitalWrite(trigger, LOW);  
   delayMicroseconds(2); 
@@ -70,5 +68,23 @@ long distanciarLateral(int trigger, int echo)
   Serial.print("Centimeter: ");
   Serial.println(distance);
   delay(500);
+
+  if(distance <= 15)
+  {
+    digitalWrite(vibrador, 150);
+    Serial.println("vibrando");
+      if(distance <= 10)
+      {
+      analogWrite(buzzer, 10);
+      }
+   }else
+   {
+     digitalWrite(vibrador, 0);
+   }
+   if(distance > 10)
+   {
+      analogWrite(buzzer, LOW);
+   }
+  
   return distance;
 }
