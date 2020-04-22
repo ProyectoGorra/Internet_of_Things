@@ -3,7 +3,7 @@
 // visit io.adafruit.com if you need to create an account,
 // or if you need your Adafruit IO key.
 #define IO_USERNAME "VictorGP"
-#define IO_KEY "aio_YTvz97VSECUE9gUuNHe2htWZGWC0"
+#define IO_KEY "aio_xkse899m4yNVWElDdzfXoPtoe6T2"
 
 /******************************* WIFI **************************************/
 
@@ -20,8 +20,8 @@
 //   - Adafruit AirLift Shield -> https://www.adafruit.com/product/4285
 //   - Adafruit AirLift FeatherWing -> https://www.adafruit.com/product/4264
 
-#define WIFI_SSID "PagaTuInternet"
-#define WIFI_PASS "aguafria"
+#define WIFI_SSID "Totalplay15f"
+#define WIFI_PASS "05241815EF2"
 
 // uncomment the following line if you are using airlift
 // #define USE_AIRLIFT

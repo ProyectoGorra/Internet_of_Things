@@ -1,6 +1,6 @@
 #include "adaf.h"
 AdafruitIO_Feed *counter = io.feed("counter");
-/////////////////////////////////////////
+/////////////////////////////////////////1
 #define TR1 5 // = pin 1
 #define EC1 4 // =´pin 2
 #define buzzer 13 // = pin 7
@@ -15,7 +15,6 @@ void setup() {
   pinMode(EC1, INPUT);
   pinMode(buzzer, OUTPUT);
   pinMode(vibrador, OUTPUT);
-  pinMode(BUILTIN_LED, OUTPUT);
   //////////////////////// Conecta a la red adafruit
   while(! Serial);
   Serial.print("Connecting to Adafruit IO");
@@ -44,12 +43,7 @@ void loop() {
   Serial.println(distancec);
   counter->save(distancec);
 
-  // increment the count by 1
-
-  // Adafruit IO is rate limited for publishing, so a delay is required in
-  // between feed->save events. In this example, we will wait three seconds
-  // (1000 milliseconds == 1 second) during each loop.
-  delay(3000);
+  delay(500);
 ////////////////////////////////////////////////
 }
 
@@ -69,11 +63,11 @@ long distanciar(int trigger, int echo)
   Serial.println(distance);
   delay(500);
 
-  if(distance <= 15)
+  if(distance <= 25)
   {
     digitalWrite(vibrador, 150);
     Serial.println("vibrando");
-      if(distance <= 10)
+      if(distance <= 15)
       {
       analogWrite(buzzer, 10);
       }
@@ -81,7 +75,7 @@ long distanciar(int trigger, int echo)
    {
      digitalWrite(vibrador, 0);
    }
-   if(distance > 10)
+   if(distance > 15)
    {
       analogWrite(buzzer, LOW);
    }
